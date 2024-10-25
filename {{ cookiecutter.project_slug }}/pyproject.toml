@@ -1,0 +1,131 @@
+# [tool.poetry]
+# name = "{{cookiecutter.project_slug}}"
+# version = "0.0.1"
+# description = "{{cookiecutter.description}}"
+# authors = ["{{cookiecutter.author_name}} <{{cookiecutter.author_email}}>"]
+# license = "MIT"
+# readme = "README.md"
+
+# [tool.poetry.dependencies]
+# python = "^{{cookiecutter.python_version}}"
+
+# [build-system]
+# requires = ["poetry-core"]
+# build-backend = "poetry.core.masonry.api"
+
+[project]
+name = "{{cookiecutter.project_slug}}"
+description = "{{cookiecutter.description}}"
+version = "0.0.1"
+authors = ["{{cookiecutter.author_name}} <{{cookiecutter.author_email}}>"]
+requires-python = ">={{cookiecutter.python_version}}"
+readme = "README.md"
+dependencies = []
+
+[tool.pytest.ini_options]
+addopts = "-vvv -rsxX -l --tb=short --strict-markers --doctest-modules"
+asyncio_mode="auto"
+cache_dir = "/tmp/pytest_cache"
+python_files = "test*.py"
+testpaths = [
+    "tests",
+]
+xfail_strict = "true"
+
+[tool.ruff]
+cache-dir = "/tmp/ruff_cache"
+fix = true
+line-length = 120
+unsafe-fixes = true
+exclude = [
+    "alembic/",
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    # project specific
+]
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "D",  # all docstrings issues
+    "TRY401",  # exception logging
+    "TCH003",  # Move standard library import {} into a type-checking block
+    "S101",  # using assert
+    "ANN101",  # self annotation
+    "ANN102",  # cls annotation
+    "EXE002",  # executable
+    # project specific
+]
+exclude = []
+
+[tool.ruff.lint.isort]
+no-lines-before = ["standard-library", "local-folder"]
+known-third-party = []
+known-local-folder = ["{{cookiecutter.pkg_folder}}"]
+lines-after-imports = 2
+force-single-line = true
+
+[tool.ruff.lint.extend-per-file-ignores]
+"tests/*.py" = ["ANN101", "S101", "S311"]
+"logger/custom.py" = ["A003", "PERF403"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.mypy]
+cache_dir = "/tmp/mypy_cache"
+disable_error_code = "import-untyped"
+exclude = [
+    "~/.pyenv/*",
+    ".venv/",
+    "alembic/",
+    # project specific
+]
+ignore_missing_imports = true
+python_version = "{{cookiecutter.python_version}}"
+plugins = [
+    "pydantic.mypy",
+]
+strict = false
+
+[tool.pyright]
+ignore = []
+include = ["{{cookiecutter.pkg_folder}}"]
+pythonVersion = "{{cookiecutter.python_version}}"
+reportInvalidTypeForm = "none"
+
+[tool.vulture]
+exclude = [
+    # project specific
+]
+paths = ["{{cookiecutter.pkg_folder}}"]
+sort_by_size = true
+# min_confidence = 80
+ignore_names = [
+    "model_config",  # pydantic
+    # project specific
+]

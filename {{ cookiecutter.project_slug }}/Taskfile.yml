@@ -1,0 +1,97 @@
+version: "3"
+
+tasks:
+  default:
+    - task: help
+
+  help:
+    desc: "List all tasks"
+    silent: true
+    cmds:
+      - task --list-all
+
+  generate-pre-commit-config:
+    desc: "Generate .pre-commit-config.yaml file from .pre-commit-config.yaml.template"
+    silent: true
+    preconditions:
+      - test -f .pre-commit-config.yaml.template
+    generates:
+      - .pre-commit-config.yaml
+    env:
+      PRE_COMMIT_ADDITIONAL_DEPENDENCIES:
+        sh: echo "$(poetry export --with dev --without-hashes | while read line; do echo "          - $(echo ${line} | sed "s/^[[:space:]]*//")"; done)"
+    cmds:
+      - envsubst < .pre-commit-config.yaml.template > .pre-commit-config.yaml
+      - echo "The .pre-commit-config.yaml file has been generated."
+
+  update-pre-commit-config:
+    desc: "Install or Update versions .pre-commit-config.yaml and poetry update"
+    cmds:
+      - poetry run pre-commit install
+      - poetry update
+      - task generate-pre-commit-config
+      - poetry run pre-commit autoupdate
+      - echo "The pre-commit updated."
+
+  lint:
+    desc: "Run pre-commit run --all-files"
+    preconditions:
+      - test -f .pre-commit-config.yaml
+    cmds:
+      - poetry run pre-commit run --all-files
+
+  build-version:
+    desc: "Generate version. Example for generate production version: task build-version -- -p"
+    env:
+      APP_VERSION:
+        sh: poetry run python -m {{cookiecutter.pkg_folder}}.config.builder {{cookiecutter._open_brackets}}{{cookiecutter._cli_args}}{{cookiecutter._close_brackets}}
+      APP_NAME:
+        sh: poetry run python -m {{cookiecutter.pkg_folder}}.config.get_name
+    cmds:
+      - sed -i'.bak' -e "s/^APP_VERSION=.*/APP_VERSION=${APP_VERSION}/; s/^APP_NAME=.*/APP_NAME=${APP_NAME}/" build_version
+      - echo "build version set up APP_VERSION=${APP_VERSION} APP_NAME=${APP_NAME}"
+
+  build-dev-docker-without-run:
+    desc: "Build docker container Example: task build-docker-without-run -- '-p'"
+    cmds:
+      - task build-version -- {{cookiecutter._open_brackets}}{{cookiecutter._cli_args}}{{cookiecutter._close_brackets}}
+      - docker compose -f docker-compose-dev.yaml --env-file ./build_version create --build
+
+  run-dev-docker:
+    desc: Run docker container
+    cmds:
+      - docker compose -f docker-compose-dev.yaml --env-file ./build_version up -d
+
+  stop-dev-docker:
+    desc: Stop docker container
+    cmds:
+      - docker compose -f docker-compose-dev.yaml --env-file ./build_version down
+
+  coverage:
+    desc: Run tests coverage
+    cmds:
+      - poetry run pytest --cov={{cookiecutter.pkg_folder}} --cov-report term-missing
+
+  test:
+    desc: Run tests
+    cmds:
+      - poetry run pytest -x -n auto --dist loadscope
+
+  retest:
+    desc: Run restart tests
+    cmds:
+      - poetry run pytest -lx --ff -n auto
+
+  install:
+    desc: Run init project
+    cmds:
+      - poetry install
+      - poetry run pip install -U pip
+      - poetry add pydantic pydantic-settings tomli sentry-sdk pyyaml
+      - poetry add -G test pytest pytest-cov pytest-mock pytest-asyncio pytest-randomly pytest-xdist hypothesis
+      - poetry add -G dev pre-commit ruff mypy vulture
+      - chmod +x ./start.py
+      - git init
+      - git branch -M main
+      - git add .
+      - git commit -m "initial"

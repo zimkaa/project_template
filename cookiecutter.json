@@ -1,0 +1,22 @@
+{
+  "project_name": "My New Project",
+  "project_slug": "{{ cookiecutter.project_name|lower|replace(' ', '_')|replace('-', '_') }}",
+  "pkg_folder": "src",
+  "python_version": "3.11",
+  "nix_python_version": "{{ cookiecutter.python_version|replace('.', '') }}",
+  "description": "Short Project description",
+  "author_name": "Anton Zimin",
+  "author_email": "example@example.net",
+  "_open_brackets": "{{",
+  "_close_brackets": "}}",
+  "_cli_args": ".CLI_ARGS",
+  "__prompts__": {
+    "package_name": "Select your project name",
+    "project_slug": "Project directory",
+    "pkg_folder": "Python package folder name",
+    "python_version": "Python version",
+    "description": "Short description",
+    "author_name": "Author full name",
+    "author_email": "Author email"
+  }
+}
