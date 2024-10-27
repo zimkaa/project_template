@@ -121,7 +121,6 @@ celerybeat.pid
 
 # Environments
 .env
-.dev.env
 .venv
 env/
 venv/
@@ -167,7 +166,6 @@ cython_debug/
 *.log.zip
 *.log.*
 .DS_Store
-test.py
 .pre-commit-config.yaml
 
 .vscode/

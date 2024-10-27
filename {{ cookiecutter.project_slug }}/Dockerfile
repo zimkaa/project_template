@@ -1,36 +1,14 @@
-###########
-# BUILDER #
-###########
-FROM python:{{cookiecutter.python_version}} AS builder
-
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+FROM python:3.13-slim-bookworm
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 WORKDIR /app
 
-COPY ./pyproject.toml ./poetry.lock /app/
+COPY ./pyproject.toml ./uv.lock /app/
 
-RUN pip install poetry && \
-    poetry config virtualenvs.create false && \
-    poetry install --no-dev
+RUN uv sync --frozen
 
-###########
-## IMAGE ##
-###########
-FROM python:{{cookiecutter.python_version}}-slim
+COPY . /app
 
-WORKDIR /home/appuser/app
+RUN chmod +x /app/start.py
 
-RUN groupadd -r appgroup && \
-    useradd -r -g appgroup appuser && \
-    chown -R appuser:appgroup /home/appuser/app
-
-COPY --from=builder /usr/local/lib/python{{cookiecutter.python_version}}/site-packages /usr/local/lib/python{{cookiecutter.python_version}}/site-packages
-
-COPY . /home/appuser/app
-
-RUN chmod +x /home/appuser/app/start.py
-
-USER appuser
-
-CMD ["sh", "./start.py"]
+CMD ["uv", "run", "./start.py"]

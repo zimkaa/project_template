@@ -2,18 +2,6 @@ default_language_version:
   python: python{{cookiecutter.python_version}}
 
 repos:
-  - repo: https://github.com/floatingpurr/sync_with_poetry
-    rev: "1.1.0"
-    hooks:
-      - id: sync_with_poetry
-
-  - repo: https://github.com/Lucas-C/pre-commit-hooks-safety
-    rev: "v1.3.3"
-    hooks:
-      - id: python-safety-dependencies-check
-        files: pyproject.toml
-        args: ["--short-report"]
-
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.4.7
     hooks:

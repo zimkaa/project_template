@@ -1,118 +1,51 @@
 # Template project
 
-## TODO list
+## Used tools
 
-- [ ] ?
+1. `cookiecutter` - Is an open source library for building coding project templates.
+2. `nix` - Is a cross-platform package manager for Unix-like systems.
+3. `task` - Is a task runner / build tool that aims to be simpler and easier to use than, for example, GNU Make.
+4. `uv` - An extremely fast Python package and project manager, written in Rust.
 
-## Install
+## Install tools
 
-### First step
+### [cookiecutter](https://cookiecutter.readthedocs.io/en/stable/installation.html)
+
+Install using `brew`
 
 ```sh
-cookiecutter https://github.com/zimkaa/template_python_project.git
+brew install cookiecutter
 ```
 
-### Second step
+### [nix](https://nixos.org/download/)
+
+Example macos
 
 ```sh
-task install
+sh <(curl -L https://nixos.org/nix/install)
 ```
 
+### [taskfile](https://taskfile.dev/)
 
-# To start
+It does not require installation because it will be activated when nix-sell is activated
 
-If you don't have installed `Task`. Just [do it](https://taskfile.dev/ru-RU/installation/). (Used to create short aliases to long commands)
+### [uv](https://docs.astral.sh/uv/getting-started/installation/)
 
-If you don't have installed `poetry` (python package manager). Also just [do it](https://python-poetry.org/docs/#installation). (It helps to keep packages actual and a human-readable view)
+It does not require installation because it will be activated when nix-sell is activated
 
-If you don't have installed `pyenv`. [Install it](https://github.com/pyenv/pyenv#installation) too. (For better using different Python versions)
+## About tools
 
-1. Clone this repo.
+`cookiecutter` - allows you to create a project framework from a template in a minute
 
-    ```sh
-    git clone https://github.com/avzimin/start-setting-for-project.git
-    ```
+`nix` - is used to manage python versions in a project. You can fix the version in the `shell.nix` file or add a tool used only for this project
 
-2. Copy `my_install.sh` to your folder to store this file. Example `cp ./my_install.sh <path_to_your_folder>`
+`uv` - quickly installs all dependencies. Allows you to speed up the assembly of the docker locally and create a virtual environment
 
-    ```sh
-    cp ./my_install.sh ~/
-    ```
-
-3. Copy `start2.py` to your project to test how works code formatter.
-
-    ```sh
-    cp ./start2.py <path_to_your_project>
-    ```
-
-4. Go to your project folder.
-
-    ```sh
-    cd <path_to_your_project>
-    ```
-
-5. Copy from your folder where file is to your project folder.  Example `cp <path_to_your_folder> ./my_install.sh`
-
-    ```sh
-    cp ~/my_install.sh .
-    ```
-
-6. Run script.
-
-    ```sh
-    ./my_install.sh
-    ```
-
-7. Initialization pre-commit.
-
-    ```sh
-    pre-commit install --allow-missing-config
-    ```
-
-8. Create actual `pre-commit.yaml`.
-
-    ```sh
-    task generate-pre-commit-config
-    ```
-
-9. Update `pre-commit` dependency.
-
-    ```sh
-    task update-pre-commit-config
-    ```
-
-10. Stage files.
-
-    ```sh
-    git add start2.py
-    ```
-
-11. Try to use manually `pre-commit` hooks.
-
-    ```sh
-    task lint
-    ```
-
-12. Try to commit changes.
-
-    ```sh
-    git commit -m "<text>"
-    ```
-
-for skip checks `git commit -m "<text>" --no-verify`
-
-## Info
-
-### About lints
-
-1. `black` formatter default use double quotes it means that most `'` will be replaced to `"`
-2. `isort` automatically places imports
-3. `safety` python package for safety check your packages
-4. `pyproject.toml` a single place of all configs here. For `ruff`, `mypy`, `black`, `isort`, `autoflake`, etc.
+`task` -  I use "task" instead of "makefile". It's really easy to use if you're lazy like me.
 
 ### About `Task`
 
-I'm using `task` instead of `makefile`. It's really simple to use if you are lazy man as me
+I'm using `task` instead of `makefile`. It's really simple to use if you are a lazy as me
 
 It's also only alias for command like this
 
@@ -130,85 +63,161 @@ You can customize your command in file `Taskfile.yml`
 
 For me, it is very useful
 
-### About `poetry`
+### About lints
 
-1. The most important thing is that helps to separate `dev` packages from `prod` environments.
+All these settings will work only for a current project. You can change the setting for a new project
 
-    Example (part of `project.toml` file):
+`pyproject.toml` - a single place of all configs here. For `ruff`, `mypy`, `pytest`, `pyright`, `vulture`, `uv` etc.
 
-    ```toml
-    [tool.poetry.dependencies]
-    python = "^3.11"
-    pydantic = "^2.5.0"
+#### mypy
 
+settings for mypy
 
-    [tool.poetry.group.dev.dependencies]
-    black = "^23.11.0"
-    ruff = "^0.1.5"
-    mypy = "^1.7.0"
-    pytest = "^7.4.3"
-    pylint = "^3.0.2"
-    bandit = "^1.7.5"
-    pre-commit = "^3.5.0"
-    safety = "^2.3.5"
-    isort = "^5.12.0"
-    autoflake = "^2.2.1"
-    ```
+#### ruff
 
-2. You can update all dependencies to the latest version  compatibility with each other
+`select = ["ALL"]` checks according to all implemented rules
 
-    ```sh
-    poetry update
-    ```
+#### vulture [github](https://github.com/jendrikseipp/vulture)
 
-3. You can view dependency tree
+`vulture` - finds unused code in Python programs
+
+#### pyright
+
+most need when you use `vscode`
+
+## Using
+
+### Steps
+
+1. First
 
     ```sh
-    poetry show -t
+    cookiecutter https://github.com/zimkaa/
     ```
 
-    looks like:
-
-    ```no-highlight
-    pydantic 2.5.0 Data validation using Python type hints
-    ├── annotated-types >=0.4.0
-    ├── pydantic-core 2.14.1
-    │   └── typing-extensions >=4.6.0,<4.7.0 || >4.7.0
-    └── typing-extensions >=4.6.1
-    ```
-
-4. If you already cloned the project just activate the virtual environment and install the dependencies
-
-    Setup right path to correct Python version
+    or use local folder with template
 
     ```sh
-    poetry env use $(pyenv which python)
+    cookiecutter [path/to/folder_settings]
     ```
 
-    Install dependency
+2. Second
 
     ```sh
-    poetry install
+    cd [project_folder]
     ```
 
-### About `pyenv`
-
-1. To change python version for folder use
+3. Third
 
     ```sh
-    pyenv local 3.10.5
+    nix-shell
     ```
 
-2. To install new version
+4. Fourth
+
+    All ready
+
+## Используемые инструменты
+
+1. `cookiecutter` - позволяет вам создать каркас проекта из шаблона за минуту
+2. `nix` - кросс-платформенный пакетный менеджер
+3. `task` - замена `makefile` более читабельный и более удобный в использовании
+4. `uv` - пакетный и проектный менеджер для python.
+
+## Установка инструментов
+
+### nix [сайт](https://nixos.org/download/)
+
+Пример macos
+
+```sh
+sh <(curl -L https://nixos.org/nix/install)
+```
+
+### task [сайт](https://taskfile.dev/)
+
+Не требует установки т.к. будет активирован при активации nix-sell
+
+### uv [сайт](https://docs.astral.sh/uv/getting-started/installation/)
+
+Не требует установки т.к. будет активирован при активации nix-sell
+
+## О используемых инструментах
+
+`cookiecutter` - позволяет из шаблона создать каркас проекта за минуту
+
+`nix` - используется для управления версиями питона в проекте. Исправить версию можно в файле `shell.nix` или добавить используемый инструмент только для этого проекта
+
+`uv` - быстро устанавливает все зависимости. Позволяет ускорить сборку докера локально и создать виртуальное окружение
+
+`task` - Я использую "task" вместо "makefile". Это действительно просто в использовании, если вы ленивый как я
+
+### О `Task`
+
+Я использую `task` вместо `makefile`. Это действительно просто в использовании, если вы ленивый как я
+
+Это также псевдоним для такой команды, как эта
+
+```sh
+task lint
+```
+
+эта команда запустит это
+
+```sh
+pre-commit run --all-files
+```
+
+Вы можете настроить свою команду в файле `Task file.yml`
+
+Для меня это очень полезно
+
+### О линтерах
+
+Все эти настройки будут работать только для текущего проекта. Вы можете изменить настройки для нового проекта
+
+`pyproject.toml` -  здесь находится единое место для всех конфигураций. Для `ruff`, `mypy`, `pytest`, `pyright`, `vulture`, `uv` и т.д.
+
+#### Настройки ruff
+
+`select = ["ALL"]` проверяет в соответствии со всеми внедренными правилами
+
+#### Настройки vulture [github](https://github.com/jendrikseipp/vulture)
+
+`vulture` - находит неиспользуемый код в программах на Python
+
+#### Настройки pyright
+
+больше всего это нужно, когда вы используете `vscode`
+
+## Использование
+
+### Шаги
+
+1. Первый
 
     ```sh
-    pyenv install 3.11
+    cookiecutter https://github.com/zimkaa/
     ```
 
-3. To change python version for folder use
+    или используйте локальную папку с шаблоном
 
     ```sh
-    pyenv 3.10.5
+    cookiecutter [path/to/folder_settings]
     ```
 
-4. I don't recommend change system python version. It can broken something
+2. Второй
+
+    ```sh
+    cd [project_folder]
+    ```
+
+3. Третий
+
+    ```sh
+    nix-shell
+    ```
+
+4. Четвертый
+
+    Все готово

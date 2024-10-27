@@ -14,7 +14,6 @@ logs/
 *.log
 *.log.zip
 *.log.*
-test.py
 .python-version
 .pre-commit-config.yaml
 .pre-commit-config.yaml.template
@@ -22,4 +21,3 @@ test.py
 
 # dotenv
 .env
-.dev.env

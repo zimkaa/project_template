@@ -1,23 +1,8 @@
-# [tool.poetry]
-# name = "{{cookiecutter.project_slug}}"
-# version = "0.0.1"
-# description = "{{cookiecutter.description}}"
-# authors = ["{{cookiecutter.author_name}} <{{cookiecutter.author_email}}>"]
-# license = "MIT"
-# readme = "README.md"
-
-# [tool.poetry.dependencies]
-# python = "^{{cookiecutter.python_version}}"
-
-# [build-system]
-# requires = ["poetry-core"]
-# build-backend = "poetry.core.masonry.api"
-
 [project]
 name = "{{cookiecutter.project_slug}}"
 description = "{{cookiecutter.description}}"
 version = "0.0.1"
-authors = ["{{cookiecutter.author_name}} <{{cookiecutter.author_email}}>"]
+authors = [{name = "{{cookiecutter.author_name}}", email = "{{cookiecutter.author_email}}"}]
 requires-python = ">={{cookiecutter.python_version}}"
 readme = "README.md"
 dependencies = []
@@ -91,7 +76,6 @@ force-single-line = true
 
 [tool.ruff.lint.extend-per-file-ignores]
 "tests/*.py" = ["ANN101", "S101", "S311"]
-"logger/custom.py" = ["A003", "PERF403"]
 
 [tool.ruff.format]
 quote-style = "double"

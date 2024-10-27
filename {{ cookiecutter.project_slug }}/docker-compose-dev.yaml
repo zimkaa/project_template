@@ -1,6 +1,0 @@
-name: dev
-
-services:
-  {{cookiecutter.project_slug}}:
-    build: .
-    env_file: .dev.env
