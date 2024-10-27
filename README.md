@@ -101,7 +101,7 @@ most need when you use `vscode`
     cookiecutter [path/to/folder_settings]
     ```
 
-2. Second. At this stage, the python version and dependencies for local development will be installed
+2. Second
 
     ```sh
     cd [project_folder]
@@ -113,7 +113,13 @@ most need when you use `vscode`
     nix-shell
     ```
 
-4. Fourth
+4. Fourth. At this stage will be installed python dependencies for local development
+
+    ```sh
+    task install
+    ```
+
+5. Fifth
 
     All ready
 
@@ -206,7 +212,7 @@ pre-commit run --all-files
     cookiecutter [path/to/folder_settings]
     ```
 
-2. Второй. На этом этапе установится версия питона и зависимости для локальной разработки
+2. Второй
 
     ```sh
     cd [project_folder]
@@ -218,6 +224,12 @@ pre-commit run --all-files
     nix-shell
     ```
 
-4. Четвертый
+4. Четвертый На этом этапе установятся зависимости для локальной разработки
+
+    ```sh
+    task install
+    ```
+
+5. Пятый
 
     Все готово
