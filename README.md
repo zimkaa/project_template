@@ -101,7 +101,7 @@ most need when you use `vscode`
     cookiecutter [path/to/folder_settings]
     ```
 
-2. Second
+2. Second. At this stage, the python version and dependencies for local development will be installed
 
     ```sh
     cd [project_folder]
@@ -206,7 +206,7 @@ pre-commit run --all-files
     cookiecutter [path/to/folder_settings]
     ```
 
-2. Второй
+2. Второй. На этом этапе установится версия питона и зависимости для локальной разработки
 
     ```sh
     cd [project_folder]

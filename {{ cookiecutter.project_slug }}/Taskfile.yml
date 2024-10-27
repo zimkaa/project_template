@@ -19,7 +19,7 @@ tasks:
       - .pre-commit-config.yaml
     env:
       PRE_COMMIT_ADDITIONAL_DEPENDENCIES:
-        sh: echo "$(uv pip freeze | while read line; do echo "          - $(echo ${line} | sed "s/^[[:space:]]*//")"; done)"
+        sh: echo "$(uv export --no-dev --no-hashes --no-header --frozen | while read line; do echo "          - $(echo ${line} | sed "s/^[[:space:]]*//")"; done)"
     cmds:
       - awk '{gsub(/\$PRE_COMMIT_ADDITIONAL_DEPENDENCIES/, ENVIRON["PRE_COMMIT_ADDITIONAL_DEPENDENCIES"]); print}' .pre-commit-config.yaml.template > .pre-commit-config.yaml   
       - echo "The .pre-commit-config.yaml file has been generated."
