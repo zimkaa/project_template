@@ -92,7 +92,7 @@ most need when you use `vscode`
 1. First
 
     ```sh
-    cookiecutter https://github.com/zimkaa/
+    cookiecutter https://github.com/zimkaa/project_template.git
     ```
 
     or use local folder with template
@@ -197,7 +197,7 @@ pre-commit run --all-files
 1. Первый
 
     ```sh
-    cookiecutter https://github.com/zimkaa/
+    cookiecutter https://github.com/zimkaa/project_template.git
     ```
 
     или используйте локальную папку с шаблоном
