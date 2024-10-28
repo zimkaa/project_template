@@ -16,7 +16,7 @@ pkgs.mkShell {
       source .venv/bin/activate
     else
       echo "Create .venv environment..."
-      task install
+      python -m venv .venv
       source .venv/bin/activate
       echo "Activated .venv environment"
     fi
