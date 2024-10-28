@@ -20,7 +20,5 @@ pkgs.mkShell {
       source .venv/bin/activate
       echo "Activated .venv environment"
     fi
-    export SHELL=$(which zsh)
-    exec $SHELL
   '';
 }
