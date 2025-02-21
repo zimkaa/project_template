@@ -2,16 +2,22 @@
 pkgs.mkShell {
   packages = [
     pkgs.python313
+    pkgs.stdenv.cc.cc.lib
     pkgs.uv
     pkgs.go-task
-    # pkgs.python310Packages.pandas
-  ];  # Указываем зависимости для devShell
+  ];
   shellHook = ''
+    export LD_LIBRARY_PATH=${pkgs.lib.makeLibraryPath [ 
+      pkgs.stdenv.cc.cc.lib 
+    ]}
     echo "Activated nix environment with $(python -V)!"
     if [ -f .env ]; then
-      export $(grep -v '^#' .env | xargs)
+      echo "Activated .env environment"
+      set -a
+      source .env
+      set +a
     fi
-    if [ -f .venv ]; then
+    if [ -d .venv ]; then
       echo "Activated .venv environment"
       source .venv/bin/activate
     else
