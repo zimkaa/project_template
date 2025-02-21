@@ -110,7 +110,7 @@ most need when you use `vscode`
 3. Third
 
     ```sh
-    nix-shell
+    nix-shell --command $SHELL
     ```
 
 4. Fourth. At this stage will be installed python dependencies for local development
