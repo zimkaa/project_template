@@ -3,9 +3,8 @@
 ## Used tools
 
 1. `cookiecutter` - Is an open source library for building coding project templates.
-2. `nix` - Is a cross-platform package manager for Unix-like systems.
-3. `task` - Is a task runner / build tool that aims to be simpler and easier to use than, for example, GNU Make.
-4. `uv` - An extremely fast Python package and project manager, written in Rust.
+2. `task` - Is a task runner / build tool that aims to be simpler and easier to use than, for example, GNU Make.
+3. `uv` - An extremely fast Python package and project manager, written in Rust.
 
 ## Install tools
 
@@ -17,27 +16,17 @@ Install using `brew`
 brew install cookiecutter
 ```
 
-### [nix](https://nixos.org/download/)
-
-Example macos
-
-```sh
-sh <(curl -L https://nixos.org/nix/install)
-```
-
 ### [taskfile](https://taskfile.dev/)
 
-It does not require installation because it will be activated when nix-sell is activated
+Need instal it
 
 ### [uv](https://docs.astral.sh/uv/getting-started/installation/)
 
-It does not require installation because it will be activated when nix-sell is activated
+Need instal it
 
 ## About tools
 
 `cookiecutter` - allows you to create a project framework from a template in a minute
-
-`nix` - is used to manage python versions in a project. You can fix the version in the `shell.nix` file or add a tool used only for this project
 
 `uv` - quickly installs all dependencies. Allows you to speed up the assembly of the docker locally and create a virtual environment
 
@@ -53,7 +42,7 @@ It's also only alias for command like this
 task lint
 ```
 
-this command will start this
+This command will start this
 
 ```sh
 pre-commit run --all-files
@@ -71,7 +60,7 @@ All these settings will work only for a current project. You can change the sett
 
 #### mypy
 
-settings for mypy
+Settings for mypy
 
 #### ruff
 
@@ -83,7 +72,7 @@ settings for mypy
 
 #### pyright
 
-most need when you use `vscode`
+Most need when you use `vscode`
 
 ## Using
 
@@ -107,52 +96,35 @@ most need when you use `vscode`
     cd [project_folder]
     ```
 
-3. Third
-
-    ```sh
-    nix-shell --command $SHELL
-    ```
-
-4. Fourth. At this stage will be installed python dependencies for local development
+3. Fourth. At this stage will be installed python dependencies for local development
 
     ```sh
     task install
     ```
 
-5. Fifth
+4. Fifth
 
     All ready
 
 ## Используемые инструменты
 
 1. `cookiecutter` - позволяет вам создать каркас проекта из шаблона за минуту
-2. `nix` - кросс-платформенный пакетный менеджер
-3. `task` - замена `makefile` более читабельный и более удобный в использовании
-4. `uv` - пакетный и проектный менеджер для python.
+2. `task` - замена `makefile` более читабельный и более удобный в использовании
+3. `uv` - пакетный и проектный менеджер для python.
 
 ## Установка инструментов
 
-### nix [сайт](https://nixos.org/download/)
-
-Пример macos
-
-```sh
-sh <(curl -L https://nixos.org/nix/install)
-```
-
 ### task [сайт](https://taskfile.dev/)
 
-Не требует установки т.к. будет активирован при активации nix-sell
+Требует установку локально
 
 ### uv [сайт](https://docs.astral.sh/uv/getting-started/installation/)
 
-Не требует установки т.к. будет активирован при активации nix-sell
+Требует установку локально
 
 ## О используемых инструментах
 
 `cookiecutter` - позволяет из шаблона создать каркас проекта за минуту
-
-`nix` - используется для управления версиями питона в проекте. Исправить версию можно в файле `shell.nix` или добавить используемый инструмент только для этого проекта
 
 `uv` - быстро устанавливает все зависимости. Позволяет ускорить сборку докера локально и создать виртуальное окружение
 
@@ -194,7 +166,7 @@ pre-commit run --all-files
 
 #### Настройки pyright
 
-больше всего это нужно, когда вы используете `vscode`
+Больше всего это нужно, когда вы используете `vscode`
 
 ## Использование
 
@@ -218,18 +190,12 @@ pre-commit run --all-files
     cd [project_folder]
     ```
 
-3. Третий
-
-    ```sh
-    nix-shell
-    ```
-
-4. Четвертый На этом этапе установятся зависимости для локальной разработки
+3. Четвертый На этом этапе установятся зависимости для локальной разработки
 
     ```sh
     task install
     ```
 
-5. Пятый
+4. Пятый
 
     Все готово
