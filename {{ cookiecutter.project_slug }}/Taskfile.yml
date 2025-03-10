@@ -69,7 +69,6 @@ tasks:
     desc: Run init project
     cmds:
       - uv sync
-      - uv run pip install -U pip
       - uv add pydantic pydantic-settings
       - uv add --dev pre-commit ruff mypy vulture pytest pytest-cov pytest-mock pytest-asyncio pytest-randomly pytest-xdist hypothesis
       - chmod +x ./start.py
