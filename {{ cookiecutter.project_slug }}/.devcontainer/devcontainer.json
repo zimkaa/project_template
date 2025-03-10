@@ -2,6 +2,8 @@
   "name": "Frontend and Backend",
   "image": "mcr.microsoft.com/devcontainers/python:{{cookiecutter.python_version}}",
   "features": {
+    "ghcr.io/devcontainers-extra/features/neovim-apt-get:1": {},
+    "ghcr.io/devcontainers-extra/features/go-task:1":{}
   },
   "onCreateCommand": "sudo chsh -s /usr/bin/zsh $USER",
   "settings": {
