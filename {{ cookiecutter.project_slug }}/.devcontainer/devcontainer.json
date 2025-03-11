@@ -1,9 +1,16 @@
 {
-  "name": "Frontend and Backend",
-  "image": "mcr.microsoft.com/devcontainers/python:{{cookiecutter.python_version}}",
+  "name": "Base container",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
   "features": {
     "ghcr.io/devcontainers-extra/features/neovim-apt-get:1": {},
+    "ghcr.io/georgofenbeck/features/lazygit-linuxbinary:1": {},
+    "ghcr.io/va-h/devcontainers-features/uv:1": {},
     "ghcr.io/devcontainers-extra/features/go-task:1":{}
+  },
+  "customizations": {
+    "vscode": {"uri": "file://${localWorkspaceFolder}/.devcontainer/vscode-settings.json"}
   },
   "onCreateCommand": "sudo chsh -s /usr/bin/zsh $USER",
   "settings": {
