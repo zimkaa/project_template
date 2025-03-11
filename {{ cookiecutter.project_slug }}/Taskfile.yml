@@ -50,6 +50,11 @@ tasks:
     cmds:
       - docker compose -f docker-compose.yaml --env-file ./.env down
 
+  run:
+    desc: Run local inside container
+    cmds:
+      - uv run python -m src
+
   coverage:
     desc: Run tests coverage
     cmds:
