@@ -1,0 +1,25 @@
+
+version: 1
+disable_existing_loggers: false
+formatters:
+  simple:
+    format: "%(asctime)s | %(levelname)8s | %(filename)s:%(lineno)3d | %(message)s"
+handlers:
+  stdout:
+    class: logging.StreamHandler
+    formatter: simple
+    stream: ext://sys.stdout
+    level: DEBUG
+  file:
+    class: logging.handlers.RotatingFileHandler
+    formatter: simple
+    filename: "{{cookiecutter.project_slug}}.log"
+    level: DEBUG
+    maxBytes: 10000000
+    backupCount: 5
+loggers:
+  root:
+    level: INFO
+    handlers:
+    - stdout
+    - file
