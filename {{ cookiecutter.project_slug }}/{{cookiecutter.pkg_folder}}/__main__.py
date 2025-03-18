@@ -1,4 +1,10 @@
-from .main import main
+from {{cookiecutter.pkg_folder}}.application import app
 
 
-main()
+def main() -> None:
+    """Start the application."""
+    # app.run()
+
+
+if __name__ == "__main__":
+    main()

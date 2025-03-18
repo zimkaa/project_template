@@ -74,9 +74,8 @@ tasks:
     desc: Run init project
     cmds:
       - uv sync
-      - uv add pydantic pydantic-settings
+      - uv add pydantic pydantic-settings pyyaml
       - uv add --dev pre-commit ruff mypy vulture pytest pytest-cov pytest-mock pytest-asyncio pytest-randomly pytest-xdist hypothesis
-      - chmod +x ./start.py
       - git init
       - git branch -M main
       - git add .
