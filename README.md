@@ -106,6 +106,14 @@ Most need when you use `vscode`
 
     All ready
 
+## My Devpod config
+
+My config devpod to recreate use add `--recreate`
+
+```sh
+devpod up . --dotfiles git@github.com:zimkaa/devpod-dotfiles.git
+```
+
 ## Используемые инструменты
 
 1. `cookiecutter` - позволяет вам создать каркас проекта из шаблона за минуту

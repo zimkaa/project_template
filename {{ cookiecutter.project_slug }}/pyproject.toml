@@ -15,7 +15,7 @@ python_files = "test*.py"
 testpaths = [
     "tests",
 ]
-xfail_strict = "true"
+xfail_strict = true
 
 [tool.ruff]
 cache-dir = "/tmp/ruff_cache"
