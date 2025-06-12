@@ -20,6 +20,7 @@
         "gruntfuggly.todo-tree",
         "matangover.mypy",
         "mechatroner.rainbow-csv",
+        "mhutchie.git-graph",
         "ms-python.debugpy",
         "ms-python.python",
         "ms-python.vscode-pylance",
