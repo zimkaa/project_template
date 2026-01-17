@@ -110,6 +110,8 @@ Most need when you use `vscode`
 
 My config devpod to recreate use add `--recreate`
 
+<https://mcr.microsoft.com/en-us/artifact/mar/devcontainers/base/tags>
+
 ```sh
 devpod up . --dotfiles git@github.com:zimkaa/devpod-dotfiles.git
 ```
